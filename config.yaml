@@ -6,3 +6,16 @@ model:
   random_state: 42
   test_size: 0.2
   good_quality_cutoff: 6
+  cv_folds: 5
+
+
+  grids:
+    logistic_regression:
+      C: [ 0.01, 0.1, 1, 10 ]
+    knn:
+      n_neighbors: [ 5, 10, 15, 20 ]
+    svm:
+      C: [ 0.01, 0.1, 1, 10 ]
+
+  output:
+    model_path: "models/best_model.joblib"
