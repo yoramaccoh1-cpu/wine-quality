@@ -1,0 +1,8 @@
+data:
+  red_url: "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
+  white_url: "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"
+
+model:
+  random_state: 42
+  test_size: 0.2
+  good_quality_cutoff: 6
