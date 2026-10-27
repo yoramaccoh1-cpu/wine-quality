@@ -52,11 +52,3 @@ class DatasetLoader:
             random_state=self.cfg["model"]["random_state"]
         )
         return self.X_train, self.X_test, self.y_train, self.y_test
-
-if __name__ == "__main__":
-    loader = DatasetLoader()
-    df = loader.load()
-    print(df.shape)
-    X_train, X_test, y_train, y_test = loader.split()
-    print("Train:", X_train.shape)
-    print("Test:", X_test.shape)
