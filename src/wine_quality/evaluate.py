@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (f1_score,roc_auc_score,confusion_matrix,ConfusionMatrixDisplay,precision_recall_curve)
 
 
-def evaluate_test(pipeline, X_test, y_test, threshold=0.5):
+def evaluate_test(pipeline, X_test, y_test, threshold=0.5) -> dict:
     """Calcule F1 et ROC-AUC sur le test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
@@ -13,7 +13,7 @@ def evaluate_test(pipeline, X_test, y_test, threshold=0.5):
     }
 
 
-def plot_confusion_matrix(pipeline, X_test, y_test, threshold=0.5):
+def plot_confusion_matrix(pipeline, X_test, y_test, threshold=0.5) -> None:
     """Affiche la matrice de confusion sur le test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
@@ -26,7 +26,7 @@ def plot_confusion_matrix(pipeline, X_test, y_test, threshold=0.5):
 
 
 
-def find_best_threshold(pipeline, X_val, y_val):
+def find_best_threshold(pipeline, X_val, y_val) -> float:
     """Trouve le seuil qui maximise le F1 sur les données de validation."""
     proba = pipeline.predict_proba(X_val)[:, 1]
     precision, recall, thresholds = precision_recall_curve(y_val, proba)
@@ -35,19 +35,3 @@ def find_best_threshold(pipeline, X_val, y_val):
     return float(thresholds[best_idx])
 
 
-if __name__ == "__main__":
-    from wine_quality.data import DatasetLoader
-    from wine_quality.models import Trainer
-
-    loader = DatasetLoader()
-    loader.load()
-    X_train, X_test, y_train, y_test = loader.split()
-
-    trainer = Trainer()
-    trainer.compare(X_train, y_train)
-    trainer.tune(X_train, y_train)
-    trainer.save()
-
-    metrics = evaluate_test(trainer.best_pipeline, X_test, y_test)
-    print(metrics)
-    plot_confusion_matrix(trainer.best_pipeline, X_test, y_test)

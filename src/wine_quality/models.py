@@ -27,13 +27,15 @@ class Trainer:
             random_state=self.cfg["model"]["random_state"]
         )
 
-    def make_pipeline(self, classifier):
+    def make_pipeline(self, classifier) -> Pipeline:
+        """création du pipeline avec le preprocessor et un classifier """
         return Pipeline([
             ("prep", build_preprocessor()),
             ("clf", classifier)
         ])
 
-    def compare(self, X_train, y_train):
+    def compare(self, X_train, y_train)-> pd.DataFrame:
+        """Comparaison de 4 modèles sous Cross validation et donne un tableau F1/ROC-AUC """
         candidates = {
             "Dummy": DummyClassifier(strategy="most_frequent"),
             "logistic regression": LogisticRegression(max_iter=1000),
@@ -55,7 +57,8 @@ class Trainer:
         self.cv_results = pd.DataFrame(rows).T.sort_values("f1", ascending=False)
         return self.cv_results
 
-    def tune(self, X_train, y_train):
+    def tune(self, X_train, y_train) -> Pipeline:
+        """GridSearchCV appliqué sur LogReg et kNN il retourne le meilleur pipeline des 4."""
         rs = self.cfg["model"]["random_state"]
 
         searches = {
@@ -85,11 +88,13 @@ class Trainer:
         self.best_pipeline = best_pipeline
         return self.best_pipeline
 
-    def save(self):
+    def save(self) -> pathlib.Path:
+        """sauvegarde le meilleur pipeline avec joblib """
         path = pathlib.Path(self.cfg["output"]["model_path"])
         path.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(self.best_pipeline, path)
         return path
 
-def load_model(path):
+def load_model(path: str) -> Pipeline:
+    """Recharge le modèle sauvegardé par save() """
     return joblib.load(path)
