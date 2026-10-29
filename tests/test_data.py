@@ -1,6 +1,5 @@
 from wine_quality.data import DatasetLoader
 
-
 def test_merge_row_count():
     loader = DatasetLoader()
     loader.load()
