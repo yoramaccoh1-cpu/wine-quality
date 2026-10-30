@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wine-quality"
+version = "0.1.0"
+description = "Predict whether a wine is good from its physicochemical properties."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "pyyaml",
+    "ucimlrepo",
+    "matplotlib",
+    "seaborn",
+    "joblib",
+]
+
+[project.scripts]
+wine-quality = "wine_quality.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
