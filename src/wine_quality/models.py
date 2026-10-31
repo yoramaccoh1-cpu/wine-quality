@@ -9,6 +9,7 @@ from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import StratifiedKFold, cross_validate, GridSearchCV
 from wine_quality.features import build_preprocessor
+from sklearn.calibration import CalibratedClassifierCV
 
 
 def _load_config(config_path="config.yaml"):
@@ -40,7 +41,7 @@ class Trainer:
             "Dummy": DummyClassifier(strategy="most_frequent"),
             "logistic regression": LogisticRegression(max_iter=1000),
             "k-NN": KNeighborsClassifier(n_neighbors=15),
-            "linear SVM": LinearSVC(C=1),
+            "linear SVM": CalibratedClassifierCV(LinearSVC(C=1)),
         }
         rows = {}
         for name, clf in candidates.items():
@@ -71,6 +72,12 @@ class Trainer:
             "k-NN": GridSearchCV(
                 self.make_pipeline(KNeighborsClassifier()),
                 param_grid={"clf__n_neighbors": self.cfg["grids"]["knn"]["n_neighbors"]},
+                cv=self._cv,
+                scoring="f1"
+            ),
+            "linear SVM": GridSearchCV(
+                self.make_pipeline(CalibratedClassifierCV(LinearSVC())),
+                param_grid={"clf__estimator__C": self.cfg["grids"]["svm"]["C"]},
                 cv=self._cv,
                 scoring="f1"
             ),
