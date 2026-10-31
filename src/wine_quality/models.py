@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import StratifiedKFold, cross_validate, GridSearchCV
-from wine_quality.features import build_preprocessor
+from wine_quality.features import prep_features
 from sklearn.calibration import CalibratedClassifierCV
 
 
@@ -31,7 +31,7 @@ class Trainer:
     def make_pipeline(self, classifier) -> Pipeline:
         """création du pipeline avec le preprocessor et un classifier """
         return Pipeline([
-            ("prep", build_preprocessor()),
+            ("prep", prep_features()),
             ("clf", classifier)
         ])
 
