@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import (f1_score,roc_auc_score,confusion_matrix,ConfusionMatrixDisplay,precision_recall_curve)
 
-
-def evaluate_test(pipeline, X_test, y_test, threshold=0.5) -> dict:
+def evaluate_test(pipeline, X_test, y_test, threshold: float = 0.5) -> dict:
     """Calcule F1 et ROC-AUC sur le test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
@@ -12,8 +11,7 @@ def evaluate_test(pipeline, X_test, y_test, threshold=0.5) -> dict:
         "roc_auc": round(roc_auc_score(y_test, proba), 3),
     }
 
-
-def plot_confusion_matrix(pipeline, X_test, y_test, threshold=0.5) -> None:
+def plot_confusion_matrix(pipeline, X_test, y_test, threshold: float = 0.5) -> None:
     """Affiche la matrice de confusion sur le test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
@@ -33,5 +31,4 @@ def find_best_threshold(pipeline, X_val, y_val) -> float:
     f1_scores = 2 * precision * recall / (precision + recall + 1e-9)
     best_idx = int(np.argmax(f1_scores[:-1]))
     return float(thresholds[best_idx])
-
 
