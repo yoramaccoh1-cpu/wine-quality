@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (f1_score,roc_auc_score,confusion_matrix,ConfusionMatrixDisplay,precision_recall_curve)
 
 def evaluate_test(pipeline, X_test, y_test, threshold: float = 0.5) -> dict:
-    """Calcule F1 et ROC-AUC sur le test set."""
+    """Compute F1 and ROC-AUC on the test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
     return {
@@ -12,7 +12,7 @@ def evaluate_test(pipeline, X_test, y_test, threshold: float = 0.5) -> dict:
     }
 
 def plot_confusion_matrix(pipeline, X_test, y_test, threshold: float = 0.5) -> None:
-    """Affiche la matrice de confusion sur le test set."""
+    """Plot the confusion matrix on the test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]
     preds = (proba >= threshold).astype(int)
     cm = confusion_matrix(y_test, preds)
@@ -25,7 +25,7 @@ def plot_confusion_matrix(pipeline, X_test, y_test, threshold: float = 0.5) -> N
 
 
 def find_best_threshold(pipeline, X_val, y_val) -> float:
-    """Trouve le seuil qui maximise le F1 sur les données de validation."""
+    """Find the threshold that maximises F1 on validation data."""
     proba = pipeline.predict_proba(X_val)[:, 1]
     precision, recall, thresholds = precision_recall_curve(y_val, proba)
     f1_scores = 2 * precision * recall / (precision + recall + 1e-9)

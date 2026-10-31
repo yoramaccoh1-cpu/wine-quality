@@ -5,7 +5,7 @@ NUM_FEATURES = ["fixed acidity", "volatile acidity", "citric acid", "residual su
 CAT_FEATURES = ["wine_type"]
 
 def prep_features() -> ColumnTransformer:
-    """Retourne un ColumnTransformer qui fait StandardScaler sur les numériques, OneHotEncoder sur wine_type."""
+    """Return a ColumnTransformer: StandardScaler on numerical features, OneHotEncoder on wine_type."""
     return ColumnTransformer([
         ("num", StandardScaler(), NUM_FEATURES),
         ("cat", OneHotEncoder(handle_unknown="ignore"), CAT_FEATURES),

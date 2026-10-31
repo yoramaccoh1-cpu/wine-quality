@@ -29,14 +29,14 @@ class Trainer:
         )
 
     def make_pipeline(self, classifier) -> Pipeline:
-        """création du pipeline avec le preprocessor et un classifier """
+        """Building a Pipeline with the preprocessor and a classifier."""
         return Pipeline([
             ("prep", prep_features()),
             ("clf", classifier)
         ])
 
     def compare(self, X_train, y_train)-> pd.DataFrame:
-        """Comparaison de 4 modèles sous Cross validation et donne un tableau F1/ROC-AUC """
+        """Compare 4 models under 5-fold CV and return a F1/ROC-AUC table."""
         candidates = {
             "Dummy": DummyClassifier(strategy="most_frequent"),
             "logistic regression": LogisticRegression(max_iter=1000),
@@ -59,7 +59,7 @@ class Trainer:
         return self.cv_results
 
     def tune(self, X_train, y_train) -> Pipeline:
-        """GridSearchCV appliqué sur LogReg et kNN il retourne le meilleur pipeline des 4."""
+        """GridSearchCV on LogReg, k-NN and LinearSVM, returns the best pipeline out of them all"""
         rs = self.cfg["model"]["random_state"]
 
         searches = {
@@ -87,7 +87,7 @@ class Trainer:
 
         for name, search in searches.items():
             search.fit(X_train, y_train)
-            print(f"{name}: meilleurs params = {search.best_params_}, F1 = {search.best_score_:.3f}")
+            print(f"{name}: best params = {search.best_params_}, F1 = {search.best_score_:.3f}")
             if search.best_score_ > best_score:
                 best_score = search.best_score_
                 best_pipeline = search.best_estimator_
@@ -96,12 +96,12 @@ class Trainer:
         return self.best_pipeline
 
     def save(self) -> pathlib.Path:
-        """sauvegarde le meilleur pipeline avec joblib """
+        """Save the best pipeline to disk with joblib."""
         path = pathlib.Path(self.cfg["output"]["model_path"])
         path.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(self.best_pipeline, path)
         return path
 
 def load_model(path: str) -> Pipeline:
-    """Recharge le modèle sauvegardé par save() """
+    """Reload the model saved by save()."""
     return joblib.load(path)
