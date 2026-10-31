@@ -18,7 +18,7 @@ class DatasetLoader:
         self.y_test = None
 
     def load(self) -> pd.DataFrame:
-        """Télécharge red et white depuis UCI, merge, nettoie et crée le label binaire."""
+        """Download red and white from UCI, merge, clean and create the binary label."""
         url_red = self.cfg["data"]["red_url"]
         url_white = self.cfg["data"]["white_url"]
         red = pd.read_csv(url_red, sep=";")
@@ -43,7 +43,7 @@ class DatasetLoader:
 
 
     def split(self) -> tuple:
-        """Split stratifié 80/20 en train et test. Appeler après load()."""
+        """Stratified 80/20 train/test split. Call after load()."""
         X = self.df.drop(columns=["quality", "good"])
         y = self.df["good"]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
