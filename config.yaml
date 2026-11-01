@@ -7,7 +7,7 @@ model:
   test_size: 0.2
   good_quality_cutoff: 6
   cv_folds: 5
-  threshold: 0.49
+  threshold: 0.53
 
 grids:
   logistic_regression:
