@@ -20,14 +20,14 @@ def train(config_path: str) -> None:
     path = trainer.save()
     print(f"Model saved to {path}")
 
-    def evaluate(config_path: str) -> None:
-        """Reload the saved model and print its F1 and ROC-AUC on the test set."""
-        loader = DatasetLoader(config_path)
-        loader.load()
-        _, X_test, _, y_test = loader.split()
-        threshold = loader.cfg["model"]["threshold"]
-        model = load_model(loader.cfg["output"]["model_path"])
-        print(evaluate_test(model, X_test, y_test, threshold))
+def evaluate(config_path: str) -> None:
+    """Reload the saved model and print its F1 and ROC-AUC on the test set."""
+    loader = DatasetLoader(config_path)
+    loader.load()
+    _, X_test, _, y_test = loader.split()
+    threshold = loader.cfg["model"]["threshold"]
+    model = load_model(loader.cfg["output"]["model_path"])
+    print(evaluate_test(model, X_test, y_test, threshold))
 
 
 def predict(config_path: str, input_path: str) -> None:
