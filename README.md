@@ -23,6 +23,12 @@ pip install -e ".[dev]"
 python -m pytest
 ```
 
+## Train the model
+
+```bash
+wine-quality train
+```
+
 ### Evaluate on the test set
 ```bash
 wine-quality evaluate
