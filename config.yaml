@@ -19,3 +19,7 @@ grids:
 
 output:
   model_path: "models/best_model.joblib"
+
+defaults:
+  knn_n_neighbors: 15
+  svm_C: 1

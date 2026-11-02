@@ -45,7 +45,7 @@ def predict(config_path: str, input_path: str) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Create the command-line parser with train, evaluate and predict."""
+    """Create the command line parser with train, evaluate and predict."""
     parser = argparse.ArgumentParser(
         prog="wine-quality", description="Wine quality classifier"
     )
