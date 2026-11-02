@@ -9,6 +9,7 @@ def _load_config(config_path: str = "config.yaml") -> dict:
 
 
 class DatasetLoader:
+    """Load, clean and split the Wine Quality dataset."""
     def __init__(self, config_path: str = "config.yaml") -> None:
         self.cfg = _load_config(config_path)
         self.df = None

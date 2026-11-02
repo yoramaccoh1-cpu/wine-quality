@@ -8,7 +8,6 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
-
 def evaluate_test(pipeline, X_test, y_test, threshold: float = 0.5) -> dict:
     """Compute F1 and ROC-AUC on the test set."""
     proba = pipeline.predict_proba(X_test)[:, 1]

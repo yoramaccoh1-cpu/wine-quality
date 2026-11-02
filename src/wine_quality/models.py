@@ -20,6 +20,7 @@ def _load_config(config_path="config.yaml"):
 
 
 class Trainer:
+    """Compare, tune and save classification pipelines."""
     def __init__(self, config_path="config.yaml"):
         self.cfg = _load_config(config_path)
         self.best_pipeline = None
