@@ -44,10 +44,6 @@ def predict(config_path: str, input_path: str) -> None:
     label = "good" if proba >= threshold else "not good"
     print(f"Prediction: {label} (P(good) = {proba:.2f})")
 
-    proba = model.predict_proba(X_new)[0, 1]
-    label = "good" if model.predict(X_new)[0] == 1 else "not good"
-    print(f"Prediction: {label} (P(good) = {proba:.2f})")
-
 
 def build_parser() -> argparse.ArgumentParser:
     """Create the command line parser with train, evaluate and predict."""
