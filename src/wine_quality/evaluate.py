@@ -1,6 +1,13 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import (f1_score,roc_auc_score,confusion_matrix,ConfusionMatrixDisplay,precision_recall_curve)
+import numpy as np
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    confusion_matrix,
+    f1_score,
+    precision_recall_curve,
+    roc_auc_score,
+)
+
 
 def evaluate_test(pipeline, X_test, y_test, threshold: float = 0.5) -> dict:
     """Compute F1 and ROC-AUC on the test set."""

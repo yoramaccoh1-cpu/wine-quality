@@ -1,15 +1,17 @@
+import pathlib
+
+import joblib
 import pandas as pd
 import yaml
-import joblib
-import pathlib
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_validate
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import StratifiedKFold, cross_validate, GridSearchCV
+from sklearn.svm import LinearSVC
+
 from wine_quality.features import prep_features
-from sklearn.calibration import CalibratedClassifierCV
 
 
 def _load_config(config_path="config.yaml"):

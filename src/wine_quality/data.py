@@ -1,6 +1,6 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 import yaml
+from sklearn.model_selection import train_test_split
 
 
 def _load_config(config_path: str = "config.yaml") -> dict:
