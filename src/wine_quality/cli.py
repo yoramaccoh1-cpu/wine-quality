@@ -33,11 +33,16 @@ def evaluate(config_path: str) -> None:
 def predict(config_path: str, input_path: str) -> None:
     """Read one wine from a JSON file and print whether the model says it is good."""
     loader = DatasetLoader(config_path)
+    threshold = loader.cfg["model"]["threshold"]
     model = load_model(loader.cfg["output"]["model_path"])
 
     with open(input_path) as f:
         wine = json.load(f)
     X_new = pd.DataFrame([wine])
+
+    proba = model.predict_proba(X_new)[0, 1]
+    label = "good" if proba >= threshold else "not good"
+    print(f"Prediction: {label} (P(good) = {proba:.2f})")
 
     proba = model.predict_proba(X_new)[0, 1]
     label = "good" if model.predict(X_new)[0] == 1 else "not good"
