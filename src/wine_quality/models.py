@@ -40,8 +40,8 @@ class Trainer:
         candidates = {
             "Dummy": DummyClassifier(strategy="most_frequent"),
             "logistic regression": LogisticRegression(max_iter=1000),
-            "k-NN": KNeighborsClassifier(n_neighbors=15),
-            "linear SVM": CalibratedClassifierCV(LinearSVC(C=1)),
+            "k-NN": KNeighborsClassifier(n_neighbors=self.cfg["defaults"]["knn_n_neighbors"]),
+            "linear SVM": CalibratedClassifierCV(LinearSVC(C=self.cfg["defaults"]["svm_C"])),
         }
         rows = {}
         for name, clf in candidates.items():
