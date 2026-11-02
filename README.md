@@ -30,7 +30,7 @@ wine-quality evaluate
 
 ### Predict for a new wine
 ```bash
-wine-quality predict --input my_wine.json
+wine-quality predict --input demo_wine.json
 ```
 
 ## Project structure
