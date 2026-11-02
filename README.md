@@ -1,4 +1,4 @@
-#Wine Quality Predictor
+# Wine Quality Predictor
 
 Binary classification: predict whether a wine is **good** (quality ≥ 6) or **not good** from its physicochemical properties.
 
@@ -11,14 +11,16 @@ Dataset: [Wine Quality – UCI #186](https://archive.ics.uci.edu/dataset/186/win
 ```bash
 git clone https://github.com/yoramaccoh1-cpu/wine-quality.git
 cd wine-quality
-pip install -e .
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
-## Usage
+## Run the tests
 
-### Train the model
 ```bash
-wine-quality train
+python -m pytest
 ```
 
 ### Evaluate on the test set

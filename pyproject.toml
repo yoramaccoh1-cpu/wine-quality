@@ -18,6 +18,10 @@ dependencies = [
     "joblib",
 ]
 
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
 [project.scripts]
 wine-quality = "wine_quality.cli:main"
 
