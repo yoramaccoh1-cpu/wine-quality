@@ -51,6 +51,12 @@ wine-quality/
 │   └── cli.py        # train / evaluate / predict
 ├── tests/
 ├── notebooks/
+├── reports/
+│   └── report.pdf
 ├── config.yaml
-└── requirements.txt
+├── pyproject.toml
+├── requirements.txt
+├── demo_wine.json
+├── AI_USAGE.md
+└── README.md
 ```
