@@ -1,6 +1,6 @@
 # AI Usage Declaration
 
-We used Claude (Anthropic) as a helper throughout the project. We declare every
+We used Claude (Anthropic) and CHATGPT as a helper throughout the project. We declare every
 use below. We ran all the code ourselves, and every number in the notebook
 comes from our own runs.
 
