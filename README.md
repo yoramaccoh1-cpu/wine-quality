@@ -29,12 +29,12 @@ python -m pytest
 wine-quality train
 ```
 
-### Evaluate on the test set
+## Evaluate on the test set
 ```bash
 wine-quality evaluate
 ```
 
-### Predict for a new wine
+## Predict for a new wine
 ```bash
 wine-quality predict --input demo_wine.json
 ```
